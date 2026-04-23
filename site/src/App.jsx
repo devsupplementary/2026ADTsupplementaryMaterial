@@ -6,6 +6,7 @@ import PianoRoll from './components/PianoRoll';
 import './index.css';
 
 const App = () => {
+  const BASE_URL = import.meta.env.BASE_URL;
   const [selectedTau, setSelectedTau] = useState(config.taus[2]); // For confusion matrices
   const [selectedDataset, setSelectedDataset] = useState(config.datasets[0]); // For audio gallery
   const [modalOpen, setModalOpen] = useState(false);
@@ -44,7 +45,7 @@ const App = () => {
               setModalOpen(true);
             }}>
               <img
-                src="/plots/f1_scores_bars.png"
+                src={`${BASE_URL}plots/f1_scores_bars.png`}
                 alt="Instrument-wise F1 Scores"
                 className="matrix-img"
               />
@@ -78,7 +79,7 @@ const App = () => {
 
         <div className="matrix-grid">
           {config.datasets.map(ds => {
-            const imgPath = `/plots/confusion_matrix_${ds}_tau_${selectedTau}.png`;
+            const imgPath = `${BASE_URL}plots/confusion_matrix_${ds}_tau_${selectedTau}.png`;
             return (
               <div key={ds} className="matrix-card">
                 <h3 style={{ marginBottom: '1rem', fontSize: '0.8rem' }}>{ds} Dataset (τ={selectedTau})</h3>
@@ -152,13 +153,13 @@ const App = () => {
                   </td>
                   <td className="audio-player-cell">
                     <div className="midi-cell-content">
-                      <audio controls src={`/upload_audios/tau_0.8/${selectedDataset}/${sample}/original.wav`} />
+                      <audio controls src={`${BASE_URL}upload_audios/tau_0.8/${selectedDataset}/${sample}/original.wav`} />
                     </div>
                   </td>
                   {config.taus.map(tau => (
                     <td key={tau} className="audio-player-cell">
                       <div className="midi-cell-content">
-                        <audio controls src={`/upload_audios/tau_${tau}/${selectedDataset}/${sample}/synthesized.wav`} />
+                        <audio controls src={`${BASE_URL}upload_audios/tau_${tau}/${selectedDataset}/${sample}/synthesized.wav`} />
                         <AnimatePresence>
                           {visibleRows[idx] && (
                             <motion.div
@@ -167,7 +168,7 @@ const App = () => {
                               exit={{ height: 0, opacity: 0 }}
                               style={{ overflow: 'hidden' }}
                             >
-                              <PianoRoll midiUrl={`/upload_audios/tau_${tau}/${selectedDataset}/${sample}/predicted_drums.mid`} />
+                              <PianoRoll midiUrl={`${BASE_URL}upload_audios/tau_${tau}/${selectedDataset}/${sample}/predicted_drums.mid`} />
                             </motion.div>
                           )}
                         </AnimatePresence>
@@ -229,8 +230,8 @@ const App = () => {
                   </div>
                   <img
                     src={modalView === 'confusion' 
-                      ? `/plots/confusion_matrix_${selectedDataset}_tau_${selectedTau}.png`
-                      : '/plots/f1_scores_bars.png'}
+                      ? `${BASE_URL}plots/confusion_matrix_${selectedDataset}_tau_${selectedTau}.png`
+                      : `${BASE_URL}plots/f1_scores_bars.png`}
                     alt="Full size plot"
                   />
                 </div>
