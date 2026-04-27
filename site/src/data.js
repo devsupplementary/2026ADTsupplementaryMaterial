@@ -1,6 +1,6 @@
 export const config = {
   title: "Learning Drum Transcription from Synthetic Data via CLAP-based One-Shot Curation",
-  subtitle: "Semi-Supervised One-Shot Sample Curation - Supplementary Material",
+  subtitle: "Supplementary Material",
   abstract: "This page presents supplementary materials for our paper, including classification reports (confusion matrices) for various confidence thresholds (τ) and audio samples comparing original inputs with transcriptions synthesized using our model.",
   taus: ["0.4", "0.6", "0.8"],
   datasets: ["ENST", "MDB"],
